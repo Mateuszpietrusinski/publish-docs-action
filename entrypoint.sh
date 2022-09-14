@@ -11,7 +11,12 @@ HAS_BASE_PATH=$8
 
 echo $X_USER_ID
 
+ls -al ~/
+
+whereis env
+
 env
+
 
 time=$(date)
 echo "::set-output name=time::$time"
