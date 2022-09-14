@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 X_USER_ID=$1
 X_API_KEY=$2
