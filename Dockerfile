@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk add coreutils bash
+RUN apk add --update coreutils bash && rm -rf /var/cache/apk/*
 
 COPY entrypoint.sh /entrypoint.sh
 
