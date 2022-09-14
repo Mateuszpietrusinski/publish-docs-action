@@ -1,4 +1,4 @@
-FROM debian:slim
+FROM debian:stable-slim
 
 RUN apt update \
   && apt -y install coreutils
