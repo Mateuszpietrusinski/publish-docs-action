@@ -17,6 +17,8 @@ ls -al ~/
 
 env
 
+curl -I -X GET https://google.com/
+
 
 time=$(date)
 echo "::set-output name=time::$time"
