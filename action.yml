@@ -1,0 +1,44 @@
+# action.yml
+name: 'VSF publish docs'
+description: 'Action to publish a new version od VSF modules documentation'
+inputs:
+  user-id: 
+    description: 'Who to greet'
+    required: true
+  api-key:
+    description: 'Who to greet'
+    required: true
+  name:
+    description: 'Name'
+    required: true
+  tag:
+    description: 'Docker image tag'
+    required: true
+  image:
+    description: 'Docker image full name'
+    required: true
+  path:
+    description: 'Path'
+    required: true
+  port:
+    description: 'Port'
+    required: true
+  has-base-path:
+    description: 'Has base path'
+    required: false
+    default: false
+outputs:
+  time:
+    description: 'The time we greeted you'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.user-id }}
+    - ${{ inputs.api-key }}
+    - ${{ inputs.name }}
+    - ${{ inputs.tag }}
+    - ${{ inputs.image}}
+    - ${{ inputs.path }}
+    - ${{ inputs.port }}
+    - ${{ inputs.has-base-path }}
