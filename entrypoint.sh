@@ -9,6 +9,8 @@ PATH=$6
 PORT=$7
 HAS_BASE_PATH=$8
 
+echo $X_USER_ID
+
 env
 
 time=$(date)

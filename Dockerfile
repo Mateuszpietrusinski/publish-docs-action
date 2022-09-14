@@ -1,7 +1,6 @@
-FROM debian:stable-slim
+FROM alpine
 
-RUN apt update \
-  && apt -y install coreutils
+RUN apk add coreutils bash
 
 COPY entrypoint.sh /entrypoint.sh
 
