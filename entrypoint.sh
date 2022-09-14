@@ -1,9 +1,15 @@
 #!/bin/bash
 
-# `$*` expands the `args` supplied in an `array` individually
-# or splits `args` in a string separated by whitespace.
-bash -c "echo $*"
+X_USER_ID=$1
+X_API_KEY=$2
+NAME=$3
+TAG=$4
+IMAGE=$5
+PATH=$6
+PORT=$7
+HAS_BASE_PATH=$8
 
-echo "Hello $1"
+env
+
 time=$(date)
 echo "::set-output name=time::$time"
