@@ -21,7 +21,7 @@ env
 
 curl -I -X GET https://google.com/
 
-curl -H X-User-Id: "$X_USER_ID'  -H "X-Api-Key: $X_API_KEY" -H "Content-Type: application/json" -X GET https://farmer.storefrontcloud.io/instance/docs-europe-west1-gcp-storefrontcloud-io
+curl -H X-User-Id: "$X_USER_ID"  -H "X-Api-Key: $X_API_KEY" -H "Content-Type: application/json" -X GET https://farmer.storefrontcloud.io/instance/docs-europe-west1-gcp-storefrontcloud-io
 
 # curl -H X-User-Id: "$X_USER_ID'  -H "X-Api-Key: $X_API_KEY" -H 'Content-Type: application/json' -X PATCH -d '
   # {
