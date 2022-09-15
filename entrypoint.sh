@@ -9,34 +9,39 @@ DOC_PATH=$6
 DOC_PORT=$7
 DOC_HAS_BASE_PATH=$8
 
-DOC_INSTANCE_NAMESPACE=
+if [[ -z "$X_USER_ID" ]]; then
+    echo -e "\x1B[31m Set variable user-id";
+    exit 1
+fi
 
-echo $X_USER_ID
+if [[ -z "$X_API_KEY" ]]; then
+    echo -e "\x1B[31m Set variable api-key";
+    exit 1
+fi
 
-ls -al ~/
+if [[ -z "$DOC_NAME" ]]; then
+    echo -e "\x1B[31m Set variable name";
+    exit 1
+fi
 
-# whereis env
+if [[ -z "$DOC_IMAGE_TAG" ]]; then
+    echo -e "\x1B[31m Set variable tag";
+    exit 1
+fi
 
-env
+if [[ -z "$DOC_IMAGE" ]]; then
+    echo -e "\x1B[31m Set variable image";
+    exit 1
+fi
 
-curl -I -X GET https://google.com/
+if [[ -z "$DOC_PATH" ]]; then
+    echo -e "\x1B[31m Set variable path";
+    exit 1
+fi
 
-curl -H "X-User-Id: $X_USER_ID"  -H "X-Api-Key: $X_API_KEY" -H "Content-Type: application/json" -X GET https://farmer.storefrontcloud.io/instance/docs-clone-europe-west1-gcp-storefrontcloud-io
+if [[ -z "$DOC_PORT" ]]; then
+    echo -e "\x1B[31m Set variable port";
+    exit 1
+fi
 
-# curl -H X-User-Id: "$X_USER_ID'  -H "X-Api-Key: $X_API_KEY" -H 'Content-Type: application/json' -X PATCH -d '
-  # {
-  #   "additional_apps":{
-  #     "apps":[{
-  #       "name":"docs-v2-bigcommerce",
-  #       "tag":"${{ steps.get_version.outputs.VERSION }}",
-  #       "image":"registry.storefrontcloud.io/docs-storefrontcloud-io/v2-bigcommerce",
-  #       "path":"/bigcommerce",
-  #       "port":"80"
-  #     }]
-  #   }
-  # }' https://farmer.storefrontcloud.io/instance/docs-europe-west1-gcp-storefrontcloud-io
-
-
-
-time=$(date)
-echo "::set-output name=time::$time"
+./publish_docs.py -u $X_USER_ID -a $X_API_KEY -n $DOC_NAME -t $DOC_IMAGE_TAG -i $DOC_IMAGE -p $DOC_PATH -r $DOC_PORT -s "$DOC_HAS_BASE_PATH"

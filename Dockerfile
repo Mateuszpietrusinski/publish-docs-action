@@ -1,6 +1,12 @@
-FROM alpine
+FROM python:3.10-slim
 
-RUN apk add --update coreutils bash curl && rm -rf /var/cache/apk/*
+WORKDIR /usr/src/publish-docs-action
+
+COPY Pipfile Pipfile.lock ./
+
+RUN pip install --progress-bar off pipenv && pipenv install --system
+
+COPY . .
 
 COPY entrypoint.sh /entrypoint.sh
 

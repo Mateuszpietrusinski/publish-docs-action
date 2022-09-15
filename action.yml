@@ -3,10 +3,10 @@ name: 'VSF publish docs'
 description: 'Action to publish a new version od VSF modules documentation'
 inputs:
   user-id: 
-    description: 'Who to greet'
+    description: 'User ID'
     required: true
   api-key:
-    description: 'Who to greet'
+    description: 'API key'
     required: true
   name:
     description: 'Name'
@@ -28,8 +28,8 @@ inputs:
     required: false
     default: false
 outputs:
-  time:
-    description: 'The time we greeted you'
+  response:
+    description: 'Update instance response code'
 runs:
   using: 'docker'
   image: 'Dockerfile'

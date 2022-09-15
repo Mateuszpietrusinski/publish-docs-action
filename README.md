@@ -1,21 +1,58 @@
-# Hello world docker action
+# Publush VSF docs
 
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
+This action publish VSF docs to VSF Cloud
 
 ## Inputs
 
-## `who-to-greet`
+### `user-id`
 
-**Required** The name of the person to greet. Default `"World"`.
+**Required** User ID
+
+### `api-key`
+
+**Required** API key
+
+### `name`
+
+**Required** Documentation name
+
+### `tag`
+
+**Required** Docker image tag
+
+### `image`
+
+**Required** Docker image full url (with registry)
+
+### `path`
+
+**Required** Documentation path
+
+### `port`
+
+**Required** Documentation port
+
+### `has-base-path`
+
+**Required** Documentation base path
 
 ## Outputs
 
-## `time`
+### `response`
 
-The time we greeted you.
+Publish action (Farmer API call) response code
 
 ## Example usage
 
-uses: actions/hello-world-docker-action@v1
+```
+uses: vuestorefront/publish-docs-action@main
 with:
-  who-to-greet: 'Mona the Octocat'
+  user-id: "${{ secrets.DOCS_CLOUD_USERNAME }}"
+  api-key: "${{ secrets.DOCS_CLOUD_PASSWORD }}"
+  name: 'docs-v2-bigcommerce'
+  tag: "${{ steps.get_version.outputs.VERSION }}"
+  image: "registry.storefrontcloud.io/docs-storefrontcloud-io/v2-bigcommerce"
+  path: "/bigcommerce"
+  port: "80"
+  has-base-path: false
+```
