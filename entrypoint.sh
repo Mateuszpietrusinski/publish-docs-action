@@ -44,4 +44,4 @@ if [[ -z "$DOC_PORT" ]]; then
     exit 1
 fi
 
-./publish_docs.py -u $X_USER_ID -a $X_API_KEY -n $DOC_NAME -t $DOC_IMAGE_TAG -i $DOC_IMAGE -p $DOC_PATH -r $DOC_PORT -s "$DOC_HAS_BASE_PATH"
+/usr/src/publish-docs-action/publish_docs.py -u $X_USER_ID -a $X_API_KEY -n $DOC_NAME -t $DOC_IMAGE_TAG -i $DOC_IMAGE -p $DOC_PATH -r $DOC_PORT -s "$DOC_HAS_BASE_PATH"
