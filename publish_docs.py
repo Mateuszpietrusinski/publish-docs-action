@@ -13,7 +13,7 @@ def str2bool(v):
 
 
 def get_docs_farmer_url():
-    return 'https://farmer.storefrontcloud.io/instance/docs-clone-europe-west1-gcp-storefrontcloud-io'
+    return 'https://farmer.storefrontcloud.io/instance/docs-europe-west1-gcp-storefrontcloud-io'
 
 
 def get_docs_headers(user_id, api_key):
@@ -40,6 +40,7 @@ def merge_additionall_applications(current, to_merge):
 
     return merged
 
+
 def get_additional_apps(user_id, api_key):
     response = requests.get(get_docs_farmer_url(), headers=get_docs_headers(user_id, api_key))
     instance = response.json()
@@ -54,6 +55,7 @@ def patch_additional_apps(user_id, api_key, payload):
     response = requests.patch(get_docs_farmer_url(), data=json.dumps(payload), headers=get_docs_headers(user_id, api_key))
 
     return response
+
 
 def publis_docs(user_id, api_key, name, tag, image, path, port, has_base_path):
     additional_apps = get_additional_apps(user_id, api_key)
@@ -114,6 +116,7 @@ def main(argv):
 
     response = publis_docs(user_id, api_key, name, tag, image, path, port, has_base_path)
     print("::set-output name=response::" + str(response.status_code))
+
 
 if __name__ == "__main__":
     main(sys.argv[1:])
