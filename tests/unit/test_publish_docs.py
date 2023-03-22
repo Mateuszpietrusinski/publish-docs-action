@@ -3,7 +3,7 @@ import json
 
 from functools import wraps
 
-from publish_docs import merge_additionall_applications
+from publish_docs import merge_additional_applications
 
 def additional_application_provider(f):
     @wraps(f)
@@ -16,7 +16,8 @@ def additional_application_provider(f):
                       "name": "cloud-v2",
                       "path": "/cloud-v2",
                       "port": "80",
-                      "tag": "da7b37f956d88e8c4baa3d1bd8f46a534cc99b8c"
+                      "tag": "da7b37f956d88e8c4baa3d1bd8f46a534cc99b8c",
+                      "farmer-namespace-name": "docs-europe-west1-gcp-storefrontcloud-io"
                     },
                     {
                       "image": "registry.storefrontcloud.io/docs-storefrontcloud-io/v2-bloomreach-search",
@@ -24,6 +25,7 @@ def additional_application_provider(f):
                       "path": "/bloomreach-search",
                       "port": "80",
                       "tag": "1.0.1642077571"
+                      "farmer-namespace-name": "docs-europe-west1-gcp-storefrontcloud-io"
                     }
                 ],
                 [
@@ -33,6 +35,7 @@ def additional_application_provider(f):
                       "path": "/cloud-v2",
                       "port": "80",
                       "tag": "da7b37f956d88e8c4baa3d1bd8f46a534cc99b8c"
+                      "farmer-namespace-name": "docs-europe-west1-gcp-storefrontcloud-io"
                     },
                     {
                       "image": "registry.storefrontcloud.io/docs-storefrontcloud-io/v2-bloomreach-search",
@@ -40,6 +43,7 @@ def additional_application_provider(f):
                       "path": "/bloomreach-search",
                       "port": "80",
                       "tag": "1.0.1656789123"
+                      "farmer-namespace-name": "docs-europe-west1-gcp-storefrontcloud-io"
                     }
                 ]
             ),
@@ -51,6 +55,7 @@ def additional_application_provider(f):
                       "path": "/cloud-v2",
                       "port": "80",
                       "tag": "da7b37f956d88e8c4baa3d1bd8f46a534cc99b8c"
+                      "farmer-namespace-name": "docs-europe-west1-gcp-storefrontcloud-io"
                     }
                 ],
                 [
@@ -60,6 +65,7 @@ def additional_application_provider(f):
                       "path": "/cloud-v2",
                       "port": "80",
                       "tag": "da7b37f956d88e8c4baa3d1bd8f46a534cc99b8c"
+                      "farmer-namespace-name": "docs-europe-west1-gcp-storefrontcloud-io"
                     },
                     {
                       "image": "registry.storefrontcloud.io/docs-storefrontcloud-io/v2-bloomreach-search",
@@ -67,6 +73,7 @@ def additional_application_provider(f):
                       "path": "/bloomreach-search",
                       "port": "80",
                       "tag": "1.0.1656789123"
+                      "farmer-namespace-name": "docs-europe-west1-gcp-storefrontcloud-io"
                     }
                 ]
             )
@@ -79,7 +86,7 @@ def additional_application_provider(f):
 
 class TestCreate(unittest.TestCase):
     @additional_application_provider
-    def test_mering_additionall_applications(self, current, expected):
+    def test_mering_additional_applications(self, current, expected):
         """Test if additional_apps are merged"""
 
         to_merge = {
@@ -90,6 +97,6 @@ class TestCreate(unittest.TestCase):
             "tag": "1.0.1656789123"
         }
 
-        merged = merge_additionall_applications(current, to_merge)
+        merged = merge_additional_applications(current, to_merge)
 
         self.assertListEqual(merged, expected)

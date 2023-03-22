@@ -8,6 +8,7 @@ DOC_IMAGE=$5
 DOC_PATH=$6
 DOC_PORT=$7
 DOC_HAS_BASE_PATH=$8
+FARMER_NAMESPACE_NAME=$9
 
 if [[ -z "$X_USER_ID" ]]; then
     echo -e "\x1B[31m Set variable user-id";
@@ -44,4 +45,9 @@ if [[ -z "$DOC_PORT" ]]; then
     exit 1
 fi
 
-/usr/src/publish-docs-action/publish_docs.py -u $X_USER_ID -a $X_API_KEY -n $DOC_NAME -t $DOC_IMAGE_TAG -i $DOC_IMAGE -p $DOC_PATH -r $DOC_PORT -s "$DOC_HAS_BASE_PATH"
+if [[ -z "$FARMER_NAMESPACE_NAME" ]]; then
+    echo -e "\x1B[31m Set variable farmer namespace name";
+    exit 1
+fi
+
+/usr/src/publish-docs-action/publish_docs.py -u $X_USER_ID -a $X_API_KEY -n $DOC_NAME -t $DOC_IMAGE_TAG -i $DOC_IMAGE -p $DOC_PATH -r $DOC_PORT -s "$DOC_HAS_BASE_PATH" -f "$FARMER_NAMESPACE_NAME"

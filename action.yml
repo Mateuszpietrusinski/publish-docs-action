@@ -2,7 +2,7 @@
 name: 'VSF publish docs'
 description: 'Action to publish a new version od VSF modules documentation'
 inputs:
-  user-id: 
+  user-id:
     description: 'User ID'
     required: true
   api-key:
@@ -26,7 +26,10 @@ inputs:
   has-base-path:
     description: 'Has base path'
     required: false
-    default: false
+    default: 'false'
+  farmer-namespace-name:
+    description: 'Farmer namespace name'
+    required: true
 outputs:
   response:
     description: 'Update instance response code'
@@ -42,3 +45,4 @@ runs:
     - ${{ inputs.path }}
     - ${{ inputs.port }}
     - ${{ inputs.has-base-path }}
+    - ${{ inputs.farmer-namespace-name }}

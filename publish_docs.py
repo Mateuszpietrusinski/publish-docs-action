@@ -12,8 +12,8 @@ def str2bool(v):
   return v.lower() in ("yes", "true", "t", "1")
 
 
-def get_docs_farmer_url():
-    return 'https://farmer.storefrontcloud.io/instance/docs-europe-west1-gcp-storefrontcloud-io'
+def get_docs_farmer_url(farmer_namespace_name):
+    return 'https://farmer.storefrontcloud.io/instance/' + farmer_namespace_name
 
 
 def get_docs_headers(user_id, api_key):
@@ -24,7 +24,7 @@ def get_docs_headers(user_id, api_key):
     }
 
 
-def merge_additionall_applications(current, to_merge):
+def merge_additional_applications(current, to_merge):
     merged = []
     new_item = True
 
@@ -41,8 +41,8 @@ def merge_additionall_applications(current, to_merge):
     return merged
 
 
-def get_additional_apps(user_id, api_key):
-    response = requests.get(get_docs_farmer_url(), headers=get_docs_headers(user_id, api_key))
+def get_additional_apps(user_id, api_key, instance_name):
+    response = requests.get(get_docs_farmer_url(farmer_namespace_name), headers=get_docs_headers(user_id, api_key))
     instance = response.json()
 
     if 'instance' in instance and 'additional_apps' in instance['instance'] and 'apps' in instance['instance']['additional_apps']:
@@ -57,8 +57,8 @@ def patch_additional_apps(user_id, api_key, payload):
     return response
 
 
-def publis_docs(user_id, api_key, name, tag, image, path, port, has_base_path):
-    additional_apps = get_additional_apps(user_id, api_key)
+def publish_docs(user_id, api_key, name, tag, image, path, port, has_base_path, farmer_namespace_name):
+    additional_apps = get_additional_apps(user_id, api_key, farmer_namespace_name)
 
     if not additional_apps:
         raise Exception("Additional application not configured")
@@ -72,10 +72,10 @@ def publis_docs(user_id, api_key, name, tag, image, path, port, has_base_path):
         "has_base_path": str2bool(has_base_path)
     }
 
-    merged_additionall_applications = merge_additionall_applications(additional_apps, to_merge)
-    payload = {'additional_apps': {'apps': merged_additionall_applications}}
-    
-    response = patch_additional_apps(user_id, api_key, payload)
+    merged_additional_applications = merge_additional_applications(additional_apps, to_merge)
+    payload = {'additional_apps': {'apps': merged_additional_applications}}
+
+    response = patch_additional_apps(user_id, api_key, payload, farmer_namespace_name)
 
     return response
 
@@ -87,7 +87,7 @@ def help():
 def main(argv):
     """Main function"""
     try:
-        opts, args = getopt.getopt(argv,"hu:a:n:t:i:p:r:s:")
+        opts, args = getopt.getopt(argv,"hu:a:n:t:i:p:r:s:f:")
     except getopt.GetoptError:
         print(help())
         sys.exit(2)
@@ -113,9 +113,11 @@ def main(argv):
                 port = arg
             if opt in ("-s"):
                 has_base_path = arg
+            if opt in ("-f"):
+                farmer_namespace_name = arg
 
-    response = publis_docs(user_id, api_key, name, tag, image, path, port, has_base_path)
-    print("::set-output name=response::" + str(response.status_code))
+    response = publish_docs(user_id, api_key, name, tag, image, path, port, has_base_path, farmer_namespace_name)
+    print("response::" + str(response.status_code))
 
 
 if __name__ == "__main__":
