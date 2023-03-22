@@ -36,6 +36,10 @@ This action publish VSF docs to VSF Cloud
 
 **Required** Documentation base path
 
+### `farmer-namespace-name`
+
+**Required** Documentation farmer-namespace-name e.g. docs-europe-west1-gcp-storefrontcloud-io
+
 ## Outputs
 
 ### `response`
