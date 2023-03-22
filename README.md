@@ -59,4 +59,5 @@ with:
   path: "/bigcommerce"
   port: "80"
   has-base-path: false
+  farmer-namespace-name: docs-europe-west1-gcp-storefrontcloud-io
 ```
