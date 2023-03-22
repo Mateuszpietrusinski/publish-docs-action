@@ -81,7 +81,7 @@ def publish_docs(user_id, api_key, name, tag, image, path, port, has_base_path, 
 
 
 def help():
-    return 'publish_docs.py -u user-id -a api-key -n name -t tag -i image -p path -r port -s has-base-path'
+    return 'publish_docs.py -u user-id -a api-key -n name -t tag -i image -p path -r port -s has-base-path -f farmer-namespace-name'
 
 
 def main(argv):
