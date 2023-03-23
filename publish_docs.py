@@ -51,8 +51,8 @@ def get_additional_apps(user_id, api_key, instance_name):
     return False
 
 
-def patch_additional_apps(user_id, api_key, payload):
-    response = requests.patch(get_docs_farmer_url(), data=json.dumps(payload), headers=get_docs_headers(user_id, api_key))
+def patch_additional_apps(user_id, api_key, payload, farmer_namespace_name):
+    response = requests.patch(get_docs_farmer_url(farmer_namespace_name), data=json.dumps(payload), headers=get_docs_headers(user_id, api_key))
 
     return response
 
