@@ -41,7 +41,7 @@ def merge_additional_applications(current, to_merge):
     return merged
 
 
-def get_additional_apps(user_id, api_key, instance_name):
+def get_additional_apps(user_id, api_key, farmer_namespace_name):
     response = requests.get(get_docs_farmer_url(farmer_namespace_name), headers=get_docs_headers(user_id, api_key))
     instance = response.json()
 
